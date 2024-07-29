@@ -1,5 +1,6 @@
-FROM openjdk:11
-VOLUME /tmp
-COPY target/my-spring-app.jar app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
-EXPOSE 8080
+FROM mariadb:latest
+ENV MYSQL_ROOT_PASSWORD=root_password
+ENV MYSQL_DATABASE=mydatabase
+ENV MYSQL_USER=myuser
+ENV MYSQL_PASSWORD=mypassword
+EXPOSE 3306
