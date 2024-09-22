@@ -1,2 +1,2 @@
-# database-mariadb
-mariadb
+# database-db
+db
