@@ -4,11 +4,11 @@ USE testdb;
 
 CREATE TABLE IF NOT EXISTS users (
     user_id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    email VARCHAR(255) NOT NULL UNIQUE,
-    nickname VARCHAR(255) ,
-    password VARCHAR(255) NOT NULL,
+    email VARCHAR(255),
+    nickname VARCHAR(255),
+    password VARCHAR(255),
     role ENUM('ADMIN', 'USER', 'SUSPENDED') DEFAULT 'USER',
-    phone_number VARCHAR(20) NOT NULL,
+    phone_number VARCHAR(20),
     school_email VARCHAR(255),
     school_email_verified BOOLEAN DEFAULT FALSE,
     postal_code VARCHAR(10),
