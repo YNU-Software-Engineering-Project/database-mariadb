@@ -17,6 +17,9 @@ CREATE TABLE IF NOT EXISTS users (
     detail_address VARCHAR(255),
     profile_image VARCHAR(255),
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+    is_social_user BOOLEAN DEFAULT FALSE
+    social_provider VARCHAR(255)
+    social_id VARCHAR(255)
     );
 
 CREATE TABLE IF NOT EXISTS funding (
@@ -158,10 +161,11 @@ CREATE TABLE IF NOT EXISTS email_token (
     email VARCHAR(255)
 );
 
-INSERT INTO users (user_id, email, nickname, password, phone_number)
+INSERT INTO users (user_id, email, nickname, password, phone_number, is_social_user, social_provider, social_id)
 VALUES
-(1, 'test@example.com', 'testuser1', 'Password123!', '010-1234-5678'),
-(2, 'test2@example.com', 'testuser2', 'Password123!', '010-1111-2222');
+(1, 'test@example.com', 'testuser1', 'Password123!', '010-1234-5678', FALSE, NULL, NULL),
+(2, 'test2@example.com', 'testuser2', 'Password123!', '010-1111-2222', TRUE, 'Kakao', '123456789');
+
 
 INSERT INTO funding (funding_id, reward_amount, title, project_summary, current_amount, target_amount, current, category, organizer_name, organizer_email, tax_email, organizer_id_card, user_id, created_at, total_likes)
 VALUES
