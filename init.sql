@@ -16,9 +16,9 @@ CREATE TABLE IF NOT EXISTS users (
     land_lot_address VARCHAR(255),
     detail_address VARCHAR(255),
     profile_image VARCHAR(255),
-    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
-    is_social_user BOOLEAN DEFAULT FALSE
-    social_provider VARCHAR(255)
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    is_social_user BOOLEAN DEFAULT FALSE,
+    social_provider VARCHAR(255),
     social_id VARCHAR(255)
     );
 
