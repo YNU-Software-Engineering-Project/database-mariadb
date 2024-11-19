@@ -158,6 +158,21 @@ CREATE TABLE IF NOT EXISTS email_token (
     email VARCHAR(255)
 );
 
+CREATE TABLE chat_rooms (
+    chat_room_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT NOT NULL,
+    admin_id BIGINT NOT NULL
+);
+
+CREATE TABLE chat_messages (
+    chat_message_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    content TEXT NOT NULL,
+    sender_id BIGINT NOT NULL,
+    chat_room_id BIGINT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_chat_room FOREIGN KEY (chat_room_id) REFERENCES chat_rooms(chat_room_id) ON DELETE CASCADE
+);
+
 INSERT INTO users (user_id, email, nickname, password, phone_number)
 VALUES
 (1, 'test@example.com', 'testuser1', 'Password123!', '010-1234-5678'),
