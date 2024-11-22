@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS funding (
     project_summary TEXT,
     reward_info TEXT,
     refund_policy TEXT,
-    story Text,
+    story LONGTEXT,
     total_likes INT DEFAULT 0,
     today_likes INT DEFAULT 0,
     total_visitors INT DEFAULT 0,
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS funding (
     current_amount INT DEFAULT 0,
     is_target_amount_achieved BOOLEAN DEFAULT FALSE,
     reward_amount INT DEFAULT NULL,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     user_id BIGINT,
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE SET NULL
 );
@@ -107,7 +107,7 @@ CREATE TABLE IF NOT EXISTS funder (
     funder_id BIGINT AUTO_INCREMENT PRIMARY KEY,
     funding_id BIGINT,
     user_id BIGINT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (funding_id) REFERENCES funding(funding_id),
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS selected_reward (
     funder_id BIGINT,
     reward_id BIGINT,
     sel_quantity INT DEFAULT 1,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (funder_id) REFERENCES funder(funder_id),
     FOREIGN KEY (reward_id) REFERENCES reward(reward_id)
 );
@@ -174,6 +174,13 @@ CREATE TABLE chat_messages (
     chat_room_id BIGINT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_chat_room FOREIGN KEY (chat_room_id) REFERENCES chat_rooms(chat_room_id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS story_image(
+    story_image_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    uuid TEXT NOT NULL,
+    funding_id BIGINT,
+    FOREIGN KEY (funding_id) REFERENCES funding(funding_id)
 );
 
 INSERT INTO users (user_id, email, nickname, password, phone_number)
